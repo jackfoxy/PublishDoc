@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{41897A66-6095-41F8-AB00-BD414B645835}"
+	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5D98-4A6A-B1E9-C8264EA8599E}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		RELEASE_NOTES.md = RELEASE_NOTES.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB2AE0-66E4-4747-AFDF-578A64C68034}"
+	ProjectSection(SolutionItems) = preProject
+		docsrc\content\buildnotes.fsx = docsrc\content\buildnotes.fsx
+		docsrc\content\index.fsx = docsrc\content\index.fsx
+		docsrc\content\operationalSemantics.fsx = docsrc\content\operationalSemantics.fsx
+		docsrc\content\tutorial.fsx = docsrc\content\tutorial.fsx
+		docsrc\content\unitTests.fsx = docsrc\content\unitTests.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
+	ProjectSection(SolutionItems) = preProject
+		packages\formatting\FSharp.Formatting\FSharp.Formatting.fsx = packages\formatting\FSharp.Formatting\FSharp.Formatting.fsx
+		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{CF43620B-6103-491C-ADFA-5F3A76DEE963}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "src\Build\build.fsproj", "{8E289B25-5069-487F-930A-4ABF8072C5CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Debug|x86.Build.0 = Debug|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Release|x86.ActiveCfg = Release|Any CPU
+		{8E289B25-5069-487F-930A-4ABF8072C5CB}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A9CB2AE0-66E4-4747-AFDF-578A64C68034} = {913E62B0-5D98-4A6A-B1E9-C8264EA8599E}
+		{2331FF94-41B7-4242-B273-D6386055DFCA} = {913E62B0-5D98-4A6A-B1E9-C8264EA8599E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D21B9123-58C9-4BA4-B521-44A320ACD56F}
+	EndGlobalSection
+EndGlobal

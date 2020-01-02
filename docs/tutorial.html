@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>LambdaCalc Tutorial
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Stripped-down PublishDoc"/>
+    <meta name="author" content="Jack Fox"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/PublishDoc/content/style.css" />
+    <script type="text/javascript" src="/PublishDoc/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="https://github.com/jackfoxy/PublishDoc">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/PublishDoc/index.html">PublishDoc</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="LambdaCalc-Tutorial" class="anchor" href="#LambdaCalc-Tutorial">LambdaCalc Tutorial</a></h1>
+<p>Use build.cmd to build the console app projects. See <a href="buildnotes.html">Build Notes</a> for important information about the first time build
+and builds after making changes to the Parser.fs files.</p>
+<p>When in PowerShell, set the output encoding to UTF-8 encoding to properly display the λ character.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+</code></pre></td></tr></table>
+<p>The following console command evaluates <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.
+Note order of lambda files is significant, as subsequent lambdas may depend on values defined in previous files.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
+</code></pre></td></tr></table>
+<p>The final input in the list <code>-c "(λx. λy. y x) (λx. x) (lambda x.x)"</code> is an example of lambda calculus typed into the console and does nothing more than demonstrate
+submitting a λ-abstraction from the console after the abstractions in the files have evaluated. To submit multiple abstractions from the console be sure to <code>;</code> separate them.</p>
+<p>See <a href="index.html">console app documentation</a> for all parameter options.</p>
+<p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
+</code></pre></td></tr></table>
+<p>Now you can write <a href="unitTests.html">unit tests</a> in the untyped Lambda Calculus. Sure beats desk-checking the abstractions you compose.</p>
+
+
+        </div>
+        <div class="span3">
+          <img src="/PublishDoc/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">PublishDoc</li>
+            <li><a href="/PublishDoc/index.html">Home page</a></li>
+            <li><a href="/PublishDoc/operationalSemantics.html">Operational Semantics</a></li>
+            <li><a href="/PublishDoc/unitTests.html">Unit Tests</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/PublishDoc">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/jackfoxy/PublishDoc">Source Code on GitHub</a></li>
+            <li><a href="/PublishDoc/license.html">License</a></li>
+            <li><a href="/PublishDoc/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              <li><a href="/PublishDoc/buildnotes.html">Build Notes</a></li>
+            <li><a href="/PublishDoc/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/PublishDoc/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/jackfoxy/PublishDoc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

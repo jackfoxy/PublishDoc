@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Unit Tests
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Stripped-down PublishDoc"/>
+    <meta name="author" content="Jack Fox"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/PublishDoc/content/style.css" />
+    <script type="text/javascript" src="/PublishDoc/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="https://github.com/jackfoxy/PublishDoc">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/PublishDoc/index.html">PublishDoc</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="Unit-Tests" class="anchor" href="#Unit-Tests">Unit Tests</a></h1>
+<p>Did you know there is a λ-abstraction you can use as the <code>assert</code> statement in unit tests? It is the boolean function on two variables
+for equivalence, sometimes known as <code>iff</code> or <a href="https://en.wikipedia.org/wiki/XNOR_gate">xnor</a>.</p>
+<p>We have implemented this function abstraction as <a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/boolean.lmbd#L9">xnor</a>,
+and possibly not in the most efficient manner. Try your hand at developing more efficient implementations.
+You have unit tests to help you.</p>
+<p>There are a number of example unit tests <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas/tests">here</a>.</p>
+<p>The tests make use of a very minimalistic language defined in the untyped lambda calculus (list is in dependency order):</p>
+<ul>
+<li>
+<a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/prelude.lmbd">prelude</a> includes the <code>bottom</code> and <code>fix</code> abstraction 
+values required by the <a href="operationalSemantics.html">untyped recursive lambda calculus</a>.
+</li>
+<li><a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/boolean.lmbd">boolean</a> includes the boolean abstractions and values for the most common boolean operations.</li>
+<li><a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/tuple.lmbd">tuple</a> the pair tuple and operations.</li>
+<li><a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/numbers.lmbd">numbers</a> some natural number abstractions and operations on natural numbers.</li>
+<li><a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/lists.lmbd">lists</a> the singly linked list abstraction.</li>
+</ul>
+<p>Most of the language elements have been described by <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Pierce</a> and elsewhere, with the <code>list</code> terms being a unique implementation
+(that is not to say no one else has done it before) implementing <code>nil</code> as <code>bottom</code> in order to function with <code>fix</code> in the
+<a href="operationalSemantics.html">untyped recursive lambda calculus</a>.</p>
+
+
+        </div>
+        <div class="span3">
+          <img src="/PublishDoc/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">PublishDoc</li>
+            <li><a href="/PublishDoc/index.html">Home page</a></li>
+            <li><a href="/PublishDoc/operationalSemantics.html">Operational Semantics</a></li>
+            <li><a href="/PublishDoc/unitTests.html">Unit Tests</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/PublishDoc">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/jackfoxy/PublishDoc">Source Code on GitHub</a></li>
+            <li><a href="/PublishDoc/license.html">License</a></li>
+            <li><a href="/PublishDoc/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              <li><a href="/PublishDoc/buildnotes.html">Build Notes</a></li>
+            <li><a href="/PublishDoc/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/PublishDoc/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/jackfoxy/PublishDoc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
