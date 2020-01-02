@@ -1,7 +1,6 @@
 ﻿
 module Build.Tasks
 
-//open System
 open System.IO
 
 open BlackFox.Fake
@@ -11,8 +10,6 @@ open Fake.DotNet
 open Fake.IO
 open Fake.IO.FileSystemOperators
 //open Fake.IO.Globbing.Operators
-//open Fake.DotNet.Testing
-//open Fake.Tools
 
 // Information about the project is used
 //  - for version and project name in generated AssemblyInfo file
@@ -127,29 +124,14 @@ let postProcessDocs () =
         |> replace "<h2>global Namespace</h2>" ""
     File.WriteAllLines(filePath, newContent)
 
-let postProcessReferenceDocs () =
-    let dirInfo = DirectoryInfo.ofPath <| sprintf "%s/%s" output "reference"
-
-    let filePath = System.IO.Path.Combine(dirInfo.FullName, "index.html")
-    let newContent =
-        File.ReadAllLines filePath
-        |> Array.toSeq
-        |> replace "<h2>global Namespace</h2>" ""
-    File.WriteAllLines(filePath, newContent)
-
 let createAndGetDefault () =
-    let clean = BuildTask.create "Clean" [] {
-        Shell.cleanDirs ["bin"; "temp"]
-        }
-
     let cleanDocs = BuildTask.create "CleanDocs" [] {
         Shell.cleanDirs ["docs/reference"; "docs"]
         File.delete "docsrc/content/release-notes.md"
         File.delete "docsrc/content/license.md"
         }
 
-    let docsOnly = BuildTask.create "DocsOnly" [cleanDocs] {
-        
+    let docs = BuildTask.create "Docs" [cleanDocs] {       
         Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
         Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
         
@@ -187,56 +169,6 @@ let createAndGetDefault () =
         postProcessDocs()
     }
 
-    let docs = BuildTask.createEmpty "Docs" [ docsOnly]
-
-    let referenceDocs = BuildTask.create "ReferenceDocs" [cleanDocs] {
-        Directory.ensure (output @@ "reference")
-        
-        let binaries () =
-            let manuallyAdded = 
-                referenceBinaries 
-                |> List.map (fun b -> bin @@ b)
-           
-            let conventionBased = 
-                DirectoryInfo.getSubDirectories <| DirectoryInfo bin
-                |> Array.filter (fun d -> 
-                    d.Name = "LambdaCalc"
-                    || d.Name = "Untyped"
-                    || d.Name = "UntypedRecurs"
-                )
-                |> Array.collect (fun d ->
-                    printfn "%s" d.FullName
-                    let name, dInfo = 
-                            d.Name, 
-                                (DirectoryInfo.getSubDirectories d 
-                                 |> Array.filter(fun x -> 
-                                    x.FullName.ToLower().Contains("netcoreapp2.1")
-                                    || x.FullName.ToLower().Contains("netstandard2.0")
-                                 )
-                                ).[0]
-                    dInfo.GetFiles()
-                    |> Array.filter (fun x -> 
-                        x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-                    |> Array.map (fun x -> x.FullName) 
-                    )
-                |> List.ofArray
-        
-            conventionBased @ manuallyAdded
-        
-        binaries()
-        |> FSFormatting.createDocsForDlls (fun args ->
-            { args with
-                OutputDirectory = output @@ "reference"
-                LayoutRoots =  layoutRootsAll.["en"]
-                ProjectParameters = ("root", root)::info
-                SourceRepository = githubLink @@ "tree/master" }
-                   )
-
-        postProcessReferenceDocs ()
-    }
-
-    let generateDocs = BuildTask.createEmpty "GenerateDocs" [docs] //; referenceDocs] 
-
-    BuildTask.createEmpty "All" [  generateDocs ]
+    BuildTask.createEmpty "All" [  docs ]
 
 let listAvailable() = BuildTask.listAvailable()
