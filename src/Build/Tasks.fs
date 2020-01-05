@@ -1,15 +1,14 @@
 ﻿
 module Build.Tasks
 
-open System.IO
-
 open BlackFox.Fake
-
+open System.IO
 open Fake.Core
 open Fake.DotNet
 open Fake.IO
 open Fake.IO.FileSystemOperators
-//open Fake.IO.Globbing.Operators
+open Fake.IO.Globbing.Operators
+
 
 // Information about the project is used
 //  - for version and project name in generated AssemblyInfo file
@@ -50,7 +49,7 @@ let website = sprintf "/%s" project
 // --------------------------------------------------------------------------------------
 
 // Read additional information from the release notes document
-let releaseNotes = ReleaseNotes.load "RELEASE_NOTES.md"
+//let releaseNotes = ReleaseNotes.load "RELEASE_NOTES.md"
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
@@ -62,7 +61,8 @@ let output     = __SOURCE_DIRECTORY__ @@ "..\\..\\docs"
 let files      = __SOURCE_DIRECTORY__ @@ "..\\..\\docsrc\\files"
 let templates  = __SOURCE_DIRECTORY__ @@ "..\\..\\docsrc\\tools\\templates"
 let formatting = __SOURCE_DIRECTORY__ @@ "..\\..\\packages\\formatting\\FSharp.Formatting"
-let docTemplate = "docpage.cshtml"
+
+let docTemplate = "tufte.cshtml"
 
 let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
 let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
@@ -78,12 +78,8 @@ let info =
 
 let root = website
 
-let referenceBinaries = []
-
 let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
-layoutRootsAll.Add("en",[   templates; 
-                            formatting @@ "templates"
-                            formatting @@ "templates/reference" ])
+layoutRootsAll.Add("en",[   templates; ])
 
 let copyFiles () =
     Shell.copyRecursive files output true 
@@ -126,26 +122,18 @@ let postProcessDocs () =
 
 let createAndGetDefault () =
     let cleanDocs = BuildTask.create "CleanDocs" [] {
-        Shell.cleanDirs ["docs/reference"; "docs"]
-        File.delete "docsrc/content/release-notes.md"
-        File.delete "docsrc/content/license.md"
+            ()
         }
 
     let docs = BuildTask.create "Docs" [cleanDocs] {       
-        Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
-        Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
-        
-        Shell.copyFile "docsrc/content/" "LICENSE.txt"
-        Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
+        //printfn "@@@@@: %s" templates
+        //DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
+        //|> Seq.iter (fun d ->
+        //    let name = d.Name
+        //    if name.Length = 2 || name.Length = 3 then
+        //        layoutRootsAll.Add( name, [ templates @@ name ] )
+        //)
 
-        DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
-        |> Seq.iter (fun d ->
-                        let name = d.Name
-                        if name.Length = 2 || name.Length = 3 then
-                            layoutRootsAll.Add(
-                                    name, [ templates @@ name
-                                            formatting @@ "templates"
-                                            formatting @@ "templates/reference" ]))
         copyFiles ()
     
         for dir in  [ content; ] do
@@ -153,7 +141,9 @@ let createAndGetDefault () =
                 path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
                 |> Array.exists(fun i -> i = lang)
             let layoutRoots =
-                let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
+                let key = 
+                    layoutRootsAll.Keys 
+                    |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
                 match key with
                 | Some lang -> layoutRootsAll.[lang]
                 | None -> layoutRootsAll.["en"] // "en" is the default language

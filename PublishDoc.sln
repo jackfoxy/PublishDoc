@@ -6,30 +6,30 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{41897A66-6095-41F8-AB00-BD414B645835}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
+		LICENSE.txt = LICENSE.txt
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5D98-4A6A-B1E9-C8264EA8599E}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE.txt = LICENSE.txt
-		README.md = README.md
-		RELEASE_NOTES.md = RELEASE_NOTES.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB2AE0-66E4-4747-AFDF-578A64C68034}"
 	ProjectSection(SolutionItems) = preProject
 		docsrc\content\buildnotes.fsx = docsrc\content\buildnotes.fsx
 		docsrc\content\index.fsx = docsrc\content\index.fsx
 		docsrc\content\operationalSemantics.fsx = docsrc\content\operationalSemantics.fsx
+		docsrc\content\tufte.md = docsrc\content\tufte.md
 		docsrc\content\tutorial.fsx = docsrc\content\tutorial.fsx
 		docsrc\content\unitTests.fsx = docsrc\content\unitTests.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
 	ProjectSection(SolutionItems) = preProject
-		packages\formatting\FSharp.Formatting\FSharp.Formatting.fsx = packages\formatting\FSharp.Formatting\FSharp.Formatting.fsx
+		docsrc\tools\build.fsx = docsrc\tools\build.fsx
+		docsrc\tools\templates\docpage.cshtml = docsrc\tools\templates\docpage.cshtml
+		docsrc\tools\FSharp.Formatting.fsx = docsrc\tools\FSharp.Formatting.fsx
 		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
+		docsrc\tools\templates\tufte.cshtml = docsrc\tools\templates\tufte.cshtml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{CF43620B-6103-491C-ADFA-5F3A76DEE963}"

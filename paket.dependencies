@@ -1,12 +1,10 @@
 source https://api.nuget.org/v3/index.json
-source http://nuget.org/api/v2
     framework: auto-detect
 
 nuget FSharp.Core
 
 group Formatting
 source https://api.nuget.org/v3/index.json
-source http://nuget.org/api/v2
     framework: auto-detect
 
 nuget FSharp.Core
@@ -16,7 +14,6 @@ nuget FSharp.Formatting.CommandTool
 
 group build
 source https://api.nuget.org/v3/index.json
-source http://nuget.org/api/v2
     framework: auto-detect
     storage: none
 
@@ -24,7 +21,6 @@ nuget FSharp.Core
 
 nuget BlackFox.Fake.BuildTask
 nuget Fake.Core.ReleaseNotes
-nuget Fake.DotNet.AssemblyInfoFile
 nuget Fake.DotNet.Cli
 nuget Fake.DotNet.FSFormatting
 nuget Fake.DotNet.Paket
